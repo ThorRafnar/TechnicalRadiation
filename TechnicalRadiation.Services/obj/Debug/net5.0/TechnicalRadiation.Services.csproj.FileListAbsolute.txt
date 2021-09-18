@@ -1,0 +1,17 @@
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/bin/Debug/net5.0/TechnicalRadiation.Services.deps.json
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/bin/Debug/net5.0/TechnicalRadiation.Services.dll
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/bin/Debug/net5.0/ref/TechnicalRadiation.Services.dll
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/bin/Debug/net5.0/TechnicalRadiation.Services.pdb
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/bin/Debug/net5.0/TechnicalRadiation.Models.dll
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/bin/Debug/net5.0/TechnicalRadiation.Repositories.dll
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/bin/Debug/net5.0/TechnicalRadiation.Models.pdb
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/bin/Debug/net5.0/TechnicalRadiation.Repositories.pdb
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/obj/Debug/net5.0/TechnicalRadiation.Services.csproj.AssemblyReference.cache
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/obj/Debug/net5.0/TechnicalRadiation.Services.GeneratedMSBuildEditorConfig.editorconfig
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/obj/Debug/net5.0/TechnicalRadiation.Services.AssemblyInfoInputs.cache
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/obj/Debug/net5.0/TechnicalRadiation.Services.AssemblyInfo.cs
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/obj/Debug/net5.0/TechnicalRadiation.Services.csproj.CoreCompileInputs.cache
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/obj/Debug/net5.0/TechnicalRadiation.Services.csproj.CopyComplete
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/obj/Debug/net5.0/TechnicalRadiation.Services.dll
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/obj/Debug/net5.0/ref/TechnicalRadiation.Services.dll
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Services/obj/Debug/net5.0/TechnicalRadiation.Services.pdb

@@ -1,0 +1,12 @@
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/obj/Debug/net5.0/TechnicalRadiation.Models.csproj.AssemblyReference.cache
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/obj/Debug/net5.0/TechnicalRadiation.Models.GeneratedMSBuildEditorConfig.editorconfig
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/obj/Debug/net5.0/TechnicalRadiation.Models.AssemblyInfoInputs.cache
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/obj/Debug/net5.0/TechnicalRadiation.Models.AssemblyInfo.cs
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/obj/Debug/net5.0/TechnicalRadiation.Models.csproj.CoreCompileInputs.cache
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/bin/Debug/net5.0/TechnicalRadiation.Models.deps.json
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/bin/Debug/net5.0/TechnicalRadiation.Models.dll
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/bin/Debug/net5.0/ref/TechnicalRadiation.Models.dll
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/bin/Debug/net5.0/TechnicalRadiation.Models.pdb
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/obj/Debug/net5.0/TechnicalRadiation.Models.dll
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/obj/Debug/net5.0/ref/TechnicalRadiation.Models.dll
+/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/obj/Debug/net5.0/TechnicalRadiation.Models.pdb
