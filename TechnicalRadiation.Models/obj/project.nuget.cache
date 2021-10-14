@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "RQiqJlpILW63cN5xpROQxSJyq3lJRXOtU06k1i2lUHFiVSlVVbyQQwfbPe6PnY99n3GM+2HTrmc7oYzrMHjTRQ==",
+  "dgSpecHash": "zI6gveJSl5ww0087BFy18jJ+BM1OxF0UTQPDHR04rbNTq3Pemone78Gh08fPtfFArs8bMoxbGWnxspHDDvwUnA==",
   "success": true,
-  "projectFilePath": "/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/TechnicalRadiation.Models.csproj",
+  "projectFilePath": "C:\\Users\\thors\\Documents\\compsci\\TechnicalRadiation\\TechnicalRadiation.Models\\TechnicalRadiation.Models.csproj",
   "expectedPackageFiles": [
-    "/Users/thorrafnar/.nuget/packages/automapper/10.1.1/automapper.10.1.1.nupkg.sha512",
-    "/Users/thorrafnar/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
-    "/Users/thorrafnar/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
-    "/Users/thorrafnar/.nuget/packages/system.reflection.emit/4.7.0/system.reflection.emit.4.7.0.nupkg.sha512"
+    "C:\\Users\\thors\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\thors\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\thors\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\thors\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -27,7 +27,7 @@ namespace TechnicalRadiation.Repositories.Implementations
 
         public List<NewsItemDto> GetAllNewsItems()
         {
-            List<NewsItemDto> newsList = _dbContext.NewsItems.Select(n => new NewsItemDto
+            List<NewsItemDto> newsList = _dbContext.NewsItems.OrderByDescending(n => n.PublishDate).Select(n => new NewsItemDto
             {
                 Id = n.Id,
                 Title = n.Title,
@@ -43,17 +43,10 @@ namespace TechnicalRadiation.Repositories.Implementations
 
         public NewsItemDetailDto GetNewsItemById(int id)
         {
-            var news = _dbContext.NewsItems.Where(n => n.Id == id).Select(n => new NewsItemDetailDto
-            {
-                Id = n.Id,
-                Title = n.Title,
-                ImgSource = n.ImgSource,
-                ShortDescription = n.ShortDescription,
-                LongDescription = n.LongDescription,
-                PublishDate = n.PublishDate
-            }).First();
-            AddLinksDetail(news);
-            return news;
+            var news = _dbContext.NewsItems.Find(id);
+            var retNews = _mapper.Map<NewsItemDetailDto>(news);
+            AddLinksDetail(retNews);
+            return retNews;
         }
 
         public NewsItemDetailDto CreateNewsItem(NewsItemInputModel newsItem)
@@ -66,16 +59,50 @@ namespace TechnicalRadiation.Repositories.Implementations
             return newsReturn;
         }
 
-        public int DeleteNewsItem(int id)
+        public void DeleteNewsItem(int id)
         {
-            var n = GetNewsItemById(id);
-            var news = _mapper.Map<NewsItem>(n);
+            var news = _dbContext.NewsItems.Find(id);
             _dbContext.NewsItems.Remove(news);
             _dbContext.SaveChanges();
-            return 1;
+            return;
+
+        }
+
+        public void UpdateNewsItem(NewsItemInputModel news, int id)
+        {
+            var oldNews = _dbContext.NewsItems.Find(id);
+            oldNews.Title = news.Title;
+            oldNews.ImgSource = news.ImgSource;
+            oldNews.ShortDescription = news.ShortDescription;
+            oldNews.LongDescription = news.LongDescription;
+            oldNews.PublishDate = news.PublishDate;
+            oldNews.ModifiedBy = "TechnicalRadiationAdmin";
+            oldNews.ModifiedDate = DateTime.Now;
+            _dbContext.SaveChanges();
+            return;
         }
         
-        private void AddLinks(NewsItemDto news)
+        public void PartiallyUpdateNewsItem(NewsItemInputModel news, int id)
+        {
+            var oldNews = _dbContext.NewsItems.Find(id);
+            if (!String.IsNullOrEmpty(news.Title)) { oldNews.Title = news.Title; }
+            if (!String.IsNullOrEmpty(news.ImgSource)) { oldNews.ImgSource = news.ImgSource; }
+            if (!String.IsNullOrEmpty(news.ShortDescription)) { oldNews.ShortDescription = news.ShortDescription; }
+            if (!String.IsNullOrEmpty(news.LongDescription)) { oldNews.LongDescription = news.LongDescription; }
+            if (news.PublishDate != DateTime.MinValue) { oldNews.PublishDate = news.PublishDate; }
+            oldNews.ModifiedBy = "TechnicalRadiationAdmin";
+            oldNews.ModifiedDate = DateTime.Now;
+            _dbContext.SaveChanges();
+            return;
+        }
+
+        public bool DoesExist(int id)
+        {
+            return _dbContext.NewsItems.Any(n => n.Id == id);
+        }
+        
+        //I want this public to avoid excessive duplication
+        public void AddLinks(NewsItemDto news)
         {
             //Get Ids of authors who wrote the news item
             List<int> authorIds = _dbContext.Authors.Where(author => author.NewsItems.Any(n => n.Id == news.Id))
@@ -127,7 +154,7 @@ namespace TechnicalRadiation.Repositories.Implementations
             List<IDictionary<string, string>> authorLinks = new List<IDictionary<string, string>>(new List<Dictionary<string, string>>());
             for (int i = 0; i < authorIds.Count; i++)
             {
-                string address = $"/api/{authorIds[i]}";
+                string address = $"/api/authors/{authorIds[i]}";
                 Dictionary<string, string> item = new Dictionary<string, string>();
                 item.Add("href", address);
                 item.Add("rel", "author");

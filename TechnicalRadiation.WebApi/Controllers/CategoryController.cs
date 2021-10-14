@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using TechnicalRadiation.Models.Dtos;
 using TechnicalRadiation.Models.InputModels;
 using TechnicalRadiation.Services.Interfaces;
+using TechnicalRadiation.WebApi.Attributes;
+using TechnicalRadiation.Models.Exceptions;
 
 namespace TechnicalRadiation.WebApi.Controllers
 {
@@ -29,25 +31,44 @@ namespace TechnicalRadiation.WebApi.Controllers
             return Ok(_categoryService.GetCategoryById(categoryId));
         }
         
-        //TODO Authorize
+        [MyAuthorize]
         [HttpPost]
         [Route("")]
         public IActionResult CreateCategory([FromBody] CategoryInputModel cat)
         {
-            if (!ModelState.IsValid)
-            {
-                return StatusCode(412, cat); 
-            }
+            if (!ModelState.IsValid) { throw new ModelFormatException(); }
             CategoryDetailDto createdCategory = _categoryService.CreateCategory(cat);
             return Created($"api/categories/{createdCategory.Id}", createdCategory);
         }
 
+        [MyAuthorize]
         [HttpPost]
         [Route("{catId:int}/newsItems/{newsId:int}")]
         public IActionResult ConntectCategoryAndNewsItem([FromRoute] int catId, [FromRoute] int newsId)
         {
-            NewsItemDetailDto connectedNewsItem = _categoryService.ConnectCategoryAndNewsItem(catId, newsId);
-            return Created($"api/{newsId}", connectedNewsItem);
+            _categoryService.ConnectCategoryAndNewsItem(catId, newsId);
+            return NoContent();
+        }
+        
+        [MyAuthorize]
+        [HttpPut]
+        [Route("{id:int}")]
+        public IActionResult UpdateCategory([FromBody] CategoryInputModel category, int id)
+        {
+            if (!ModelState.IsValid) { throw new ModelFormatException(); }
+            _categoryService.UpdateCategory(category, id);
+            return NoContent();
+
+        }
+        
+        [MyAuthorize]
+        [HttpDelete]
+        [Route("{id:int}")]
+        public IActionResult DeleteCategory(int id)
+        {
+            _categoryService.DeleteCategory(id);
+            return NoContent();
+
         }
     }
 }

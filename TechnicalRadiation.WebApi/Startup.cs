@@ -25,6 +25,7 @@ using TechnicalRadiation.Services.Interfaces;
 using TechnicalRadiation.WebApi;
 using TechnicalRadiation.WebApi.Controllers;
 using TechnicalRadiation.WebApi.Mapping;
+using TechnicalRadiation.WebApi.ExceptionHandlerExtensions;
 
 namespace TechnicalRadiation.WebApi
 {
@@ -75,6 +76,8 @@ namespace TechnicalRadiation.WebApi
             }
             
             app.UseHttpsRedirection();
+            
+            app.UseGlobalExceptionHandler();
 
             app.UseRouting();
 

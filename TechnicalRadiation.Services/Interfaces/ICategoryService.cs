@@ -11,6 +11,8 @@ namespace TechnicalRadiation.Services.Interfaces
         List<CategoryDto> GetAllCategories();
 
         CategoryDetailDto CreateCategory(CategoryInputModel cat);
-        NewsItemDetailDto ConnectCategoryAndNewsItem(int catId, int newsId);
+        void ConnectCategoryAndNewsItem(int catId, int newsId);
+        void UpdateCategory(CategoryInputModel cat, int id);
+        void DeleteCategory(int id);
     }
 }

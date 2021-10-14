@@ -17,12 +17,14 @@ namespace TechnicalRadiation.Repositories.Implementations
     public class AuthorRepository : IAuthorRepository
     {
         private readonly NewsDbContext _dbContext;
+        private readonly INewsItemRepository _newsItemRepository;
         private IMapper _mapper;
 
-        public AuthorRepository(NewsDbContext dbContext, IMapper mapper)
+        public AuthorRepository(NewsDbContext dbContext, IMapper mapper, INewsItemRepository newsItemRepository)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _newsItemRepository = newsItemRepository;
         }
         
         public List<AuthorDto> GetAllAuthors()
@@ -32,29 +34,25 @@ namespace TechnicalRadiation.Repositories.Implementations
                 Id = a.Id,
                 Name = a.Name
             }).ToList();
-            for (int i = 0; i < authors.Count; i++)
+            foreach (AuthorDto author in authors)
             {
-                AddLinks(authors[i]);
+                AddLinks(author);
             }
             return authors;
         }
 
         public AuthorDetailDto GetAuthorById(int id)
         {
-            AuthorDetailDto author = _dbContext.Authors.Where(a => a.Id == id).Select(a => new AuthorDetailDto
-            {
-                Id = a.Id,
-                Name = a.Name,
-                ProfileImgSource = a.ProfileImgSource,
-                Bio = a.Bio
-            }).First();
-            AddLinksDetail(author);
-            return author;
+            var author = _dbContext.Authors.Find(id);
+            if (author == null) { return new AuthorDetailDto(); }
+            var ret = _mapper.Map<AuthorDetailDto>(author);
+            AddLinksDetail(ret);
+            return ret;
         }
 
         public List<NewsItemDto> GetNewsItemsByAuthorId(int authorId)
         {
-            return _dbContext.NewsItems.Where(NewsItem => NewsItem.Authors.Any(a => a.Id == authorId))
+            var newsList = _dbContext.NewsItems.Where(NewsItem => NewsItem.Authors.Any(a => a.Id == authorId))
                 .Select(n => new NewsItemDto
                 {
                     Id = n.Id,
@@ -62,6 +60,12 @@ namespace TechnicalRadiation.Repositories.Implementations
                     ImgSource = n.ImgSource,
                     ShortDescription = n.ShortDescription
                 }).ToList();
+            foreach (NewsItemDto news in newsList)
+            {
+                _newsItemRepository.AddLinks(news);
+            }
+
+            return newsList;
         }
 
         public AuthorDetailDto CreateAuthor(AuthorInputModel authorInputModel)
@@ -80,17 +84,53 @@ namespace TechnicalRadiation.Repositories.Implementations
             return retAuthor;
         }
 
-        public NewsItemDetailDto ConnectAuthorAndNewsItem(int authId, int newsId)
+        public void ConnectAuthorAndNewsItem(int authId, int newsId)
         {
             var newsItem = _dbContext.NewsItems.Include(n=> n.Authors).FirstOrDefault(n => n.Id == newsId);
             var author = _dbContext.Authors.Find(authId);
             newsItem.Authors.Add(author);
             _dbContext.SaveChanges();
-            NewsItemDetailDto newsRet = _mapper.Map<NewsItemDetailDto>(newsItem);
-            return newsRet;
+            return;
         }
 
-        //I know these two do the same thing, but whatever
+        public void DeleteAuthor(int id)
+        {
+            var author = _dbContext.Authors.Find(id);
+            _dbContext.Authors.Remove(author);
+            _dbContext.SaveChanges();
+            return;
+        }
+
+        public void UpdateAuthor(AuthorInputModel author, int id)
+        {
+            var oldAuthor = _dbContext.Authors.Find(id);
+            oldAuthor.Name = author.Name;
+            oldAuthor.ProfileImgSource = author.ProfileImgSource;
+            oldAuthor.Bio = author.Bio;
+            oldAuthor.ModifiedBy = "TechnicalRadiationAdmin";
+            oldAuthor.ModifiedDate = DateTime.Now;
+            _dbContext.SaveChanges();
+            return;
+        }
+
+        public void PartiallyUpdateAuthor(AuthorInputModel author, int id)
+        {
+            var oldAuthor = _dbContext.Authors.Find(id);
+            if (!String.IsNullOrEmpty(author.Name)) { oldAuthor.Name = author.Name; }
+            if (!String.IsNullOrEmpty(author.ProfileImgSource)) { oldAuthor.ProfileImgSource = author.ProfileImgSource; }
+            if (!String.IsNullOrEmpty(author.Bio)) { oldAuthor.Bio = author.Bio; }
+            oldAuthor.ModifiedBy = "TechnicalRadiationAdmin";
+            oldAuthor.ModifiedDate = DateTime.Now;
+            _dbContext.SaveChanges();
+            return;
+        }
+        
+        public bool DoesExist(int id)
+        {
+            return _dbContext.Authors.Any(a => a.Id == id);
+        }
+
+        //I know these do the same thing, but whatever
         private void AddLinks(AuthorDto author)
         {
             //Get Ids of news item by author

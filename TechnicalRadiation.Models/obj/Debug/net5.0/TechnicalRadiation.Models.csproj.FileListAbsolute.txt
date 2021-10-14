@@ -10,3 +10,15 @@
 /Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/obj/Debug/net5.0/TechnicalRadiation.Models.dll
 /Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/obj/Debug/net5.0/ref/TechnicalRadiation.Models.dll
 /Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/obj/Debug/net5.0/TechnicalRadiation.Models.pdb
+C:\Users\thors\Documents\compsci\TechnicalRadiation\TechnicalRadiation.Models\bin\Debug\net5.0\TechnicalRadiation.Models.deps.json
+C:\Users\thors\Documents\compsci\TechnicalRadiation\TechnicalRadiation.Models\bin\Debug\net5.0\TechnicalRadiation.Models.dll
+C:\Users\thors\Documents\compsci\TechnicalRadiation\TechnicalRadiation.Models\bin\Debug\net5.0\ref\TechnicalRadiation.Models.dll
+C:\Users\thors\Documents\compsci\TechnicalRadiation\TechnicalRadiation.Models\bin\Debug\net5.0\TechnicalRadiation.Models.pdb
+C:\Users\thors\Documents\compsci\TechnicalRadiation\TechnicalRadiation.Models\obj\Debug\net5.0\TechnicalRadiation.Models.csproj.AssemblyReference.cache
+C:\Users\thors\Documents\compsci\TechnicalRadiation\TechnicalRadiation.Models\obj\Debug\net5.0\TechnicalRadiation.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\thors\Documents\compsci\TechnicalRadiation\TechnicalRadiation.Models\obj\Debug\net5.0\TechnicalRadiation.Models.AssemblyInfoInputs.cache
+C:\Users\thors\Documents\compsci\TechnicalRadiation\TechnicalRadiation.Models\obj\Debug\net5.0\TechnicalRadiation.Models.AssemblyInfo.cs
+C:\Users\thors\Documents\compsci\TechnicalRadiation\TechnicalRadiation.Models\obj\Debug\net5.0\TechnicalRadiation.Models.csproj.CoreCompileInputs.cache
+C:\Users\thors\Documents\compsci\TechnicalRadiation\TechnicalRadiation.Models\obj\Debug\net5.0\TechnicalRadiation.Models.dll
+C:\Users\thors\Documents\compsci\TechnicalRadiation\TechnicalRadiation.Models\obj\Debug\net5.0\ref\TechnicalRadiation.Models.dll
+C:\Users\thors\Documents\compsci\TechnicalRadiation\TechnicalRadiation.Models\obj\Debug\net5.0\TechnicalRadiation.Models.pdb

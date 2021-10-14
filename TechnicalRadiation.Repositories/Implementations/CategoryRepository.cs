@@ -42,22 +42,17 @@ namespace TechnicalRadiation.Repositories.Implementations
 
         public CategoryDetailDto GetCategoryById(int id)
         {
-            var cat = _dbContext.Categories.Where(c => c.Id == id).Select(n => new CategoryDetailDto
-            {
-                Id = n.Id,
-                Name = n.Name,
-                Slug = n.Slug,
-                NumberOfNewsItems = n.NewsItems.Count
-            }).FirstOrDefault();
-            AddLinksDetail(cat);
-            return cat;
+            var cat = _dbContext.Categories.Find(id);
+            var ret = _mapper.Map<CategoryDetailDto>(cat);
+            AddLinksDetail(ret);
+            return ret;
         }
 
         public CategoryDetailDto CreateCategory(CategoryInputModel cat)
         {
             //Map input model to entity
             var eCategory = _mapper.Map<Category>(cat);
-            eCategory.Slug = (cat.Name.ToLower().Replace(' ', '-'));
+            eCategory.Slug = ConvertToSlug(cat.Name);
             eCategory.ModifiedBy = "TechnicalRadiationAdmin";
             eCategory.CreatedDate = DateTime.Now;
             eCategory.ModifiedDate = DateTime.Now;
@@ -70,14 +65,48 @@ namespace TechnicalRadiation.Repositories.Implementations
             return category;
         }
 
-        public NewsItemDetailDto ConnectCategoryAndNewsItem(int catId, int newsId)
+        public void ConnectCategoryAndNewsItem(int catId, int newsId)
         {
-            var newsItem = _dbContext.NewsItems.Include(n=> n.Categories).FirstOrDefault(n => n.Id == newsId);
+            var newsItem = _dbContext.NewsItems.Include(n => n.Categories).FirstOrDefault(n => n.Id == newsId);
             var category = _dbContext.Categories.Find(catId);
+            if (newsItem.Categories.Contains(category))
+            {
+                // If they are already connected, do nothing
+                // No need to throw exception here though, in my opinion
+                return;
+            }
             newsItem.Categories.Add(category);
             _dbContext.SaveChanges();
-            NewsItemDetailDto newsRet = _mapper.Map<NewsItemDetailDto>(newsItem);
-            return newsRet;
+            return;
+        }
+
+        public void UpdateCategory(CategoryInputModel cat, int id)
+        {
+            var oldCat = _dbContext.Categories.Find(id);
+            oldCat.Name = cat.Name;
+            oldCat.Slug = ConvertToSlug(cat.Name);
+            oldCat.ModifiedBy = "TechnicalRadiationAdmin";
+            oldCat.ModifiedDate = DateTime.Now;
+            _dbContext.SaveChanges();
+            return;
+        }
+
+        public void DeleteCategory(int id)
+        {
+            var cat = _dbContext.Categories.Find(id);
+            _dbContext.Categories.Remove(cat);
+            _dbContext.SaveChanges();
+            return;
+        }
+
+        public bool DoesExist(int id)
+        {
+            return _dbContext.Categories.Any(c => c.Id == id);
+        }
+
+        private string ConvertToSlug(string name)
+        {
+            return (name.ToLower().Replace(' ', '-'));
         }
 
         private void AddLinks(CategoryDto category)

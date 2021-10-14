@@ -5,6 +5,7 @@ using TechnicalRadiation.Models.Dtos;
 using TechnicalRadiation.Models.InputModels;
 using TechnicalRadiation.Repositories.Interfaces;
 using TechnicalRadiation.Services.Interfaces;
+using TechnicalRadiation.Models.Exceptions;
 
 namespace TechnicalRadiation.Services.Implementations
 {
@@ -19,19 +20,16 @@ namespace TechnicalRadiation.Services.Implementations
 
         public NewsItemDetailDto GetNewsItemById(int id)
         {
-            if (id < 1) { throw new ArgumentOutOfRangeException("Id should not be lower than 1"); }
-            //if (!_newsItemRepository.DoesExist(id))
-            //{
-                // TODO: Implement and uncomment
-                // throw new ResourceNotFoundException($"News item with id {id} was not found."); 
-            //}
+            if (id < 1) { throw new ArgumentOutOfRangeException(); }
+            if (!_newsItemRepository.DoesExist(id)) { throw new ResourceNotFoundException($"News item with id {id} was not found."); }
             return _newsItemRepository.GetNewsItemById(id);
         }
 
         public Envelope<NewsItemDto> GetAllNewsItems(int pageNumber, int pageSize)
         {
-            Envelope<NewsItemDto> envelope =
-                new Envelope<NewsItemDto>(pageNumber, pageSize, _newsItemRepository.GetAllNewsItems());
+            
+            Envelope<NewsItemDto> envelope = new Envelope<NewsItemDto>(pageNumber, pageSize, _newsItemRepository.GetAllNewsItems());
+           
             return envelope;
         }
 
@@ -40,9 +38,24 @@ namespace TechnicalRadiation.Services.Implementations
             return _newsItemRepository.CreateNewsItem(newsItem);
         }
 
-        public int DeleteNewsItem(int id)
+        public void DeleteNewsItem(int id)
         {
-            return _newsItemRepository.DeleteNewsItem(id);
+            if (id < 1) { throw new ArgumentOutOfRangeException(); }
+            if (!_newsItemRepository.DoesExist(id)) { throw new ResourceNotFoundException($"News item with id {id} was not found, and cannot be deleted."); }
+            _newsItemRepository.DeleteNewsItem(id);
+        }
+
+        public void UpdateNewsItem(NewsItemInputModel news, int id)
+        {
+            if (id < 1) { throw new ArgumentOutOfRangeException(); }
+            if (!_newsItemRepository.DoesExist(id)) { throw new ResourceNotFoundException($"News item with id {id} was not found."); }
+            _newsItemRepository.UpdateNewsItem(news, id);
+        }
+        public void PartiallyUpdateNewsItem(NewsItemInputModel news, int id)
+        {
+            if (id < 1) { throw new ArgumentOutOfRangeException(); }
+            if (!_newsItemRepository.DoesExist(id)) { throw new ResourceNotFoundException($"News item with id {id} was not found."); }
+            _newsItemRepository.PartiallyUpdateNewsItem(news, id);
         }
     }
 }

@@ -12,6 +12,9 @@ namespace TechnicalRadiation.Repositories.Interfaces
 
         CategoryDetailDto CreateCategory(CategoryInputModel cat);
 
-        NewsItemDetailDto ConnectCategoryAndNewsItem(int catId, int newsId);
+        void ConnectCategoryAndNewsItem(int catId, int newsId);
+        void UpdateCategory(CategoryInputModel cat, int id);
+        void DeleteCategory(int id);
+        bool DoesExist(int id);
     }
 }

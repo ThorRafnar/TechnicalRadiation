@@ -1,9 +1,11 @@
 using System;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TechnicalRadiation.Models.Dtos;
 using TechnicalRadiation.Models.InputModels;
 using TechnicalRadiation.Services.Interfaces;
+using TechnicalRadiation.WebApi.Attributes;
+using TechnicalRadiation.Models.Exceptions;
+
 
 namespace TechnicalRadiation.WebApi.Controllers
 {
@@ -31,40 +33,42 @@ namespace TechnicalRadiation.WebApi.Controllers
             return Ok(_newsItemService.GetNewsItemById(id));
         }
 
-        //TODO Authorize
+        [MyAuthorize]
         [HttpPost]
         [Route("")]
         public IActionResult CreateNewsItem([FromBody] NewsItemInputModel newsItem)
         {
-            if (!ModelState.IsValid)
-            {
-                return StatusCode(412, newsItem); 
-            }
+            if(!ModelState.IsValid) { throw new ModelFormatException(); }
             NewsItemDetailDto createdNewsItem = _newsItemService.CreateNewsItem(newsItem);
             return Created($"api/{createdNewsItem.Id}", createdNewsItem);
         }
         
-        //TODO returns 405 method not allowed for some reason
+        [MyAuthorize]
         [HttpDelete]
         [Route("{id:int}")]
         public IActionResult DeleteNewsItem(int id)
         {
-            Console.WriteLine((id));
-            return Ok(_newsItemService.DeleteNewsItem(id));
-        }
-        
-        //TODO returns 405 method not allowed for some reason
-        [HttpPut]
-        [Route("api/{newsItemId}")]
-        public IActionResult UpdateNewsItem([FromBody] NewsItemInputModel newsItem, int newsItemId)
-        {
-            if(!ModelState.IsValid){
-                //lista upp villur og henda í badrequestinu
-                return BadRequest("The Model is not properly formatted");
-            }
-            //_newsItemService.UpdateNewsItem(newsItem); 
+            _newsItemService.DeleteNewsItem(id);
             return NoContent();
         }
         
+        [MyAuthorize]
+        [HttpPut]
+        [Route("{id:int}")]
+        public IActionResult UpdateNewsItem([FromBody] NewsItemInputModel newsItem, int id)
+        {
+            if(!ModelState.IsValid) { throw new ModelFormatException(); }
+            _newsItemService.UpdateNewsItem(newsItem, id);
+            return NoContent();
+        }
+        
+        [MyAuthorize]
+        [HttpPatch]
+        [Route("{id:int}")]
+        public IActionResult PartiallyUpdateNewsItem([FromBody] NewsItemInputModel newsItem, int id)
+        {
+            _newsItemService.PartiallyUpdateNewsItem(newsItem, id);
+            return NoContent();
+        }
     }
 }

@@ -11,7 +11,8 @@ namespace TechnicalRadiation.Services.Interfaces
         Envelope<NewsItemDto> GetAllNewsItems(int pageNumber, int pageSize);
 
         NewsItemDetailDto CreateNewsItem(NewsItemInputModel newsItem);
-        int DeleteNewsItem(int id);
-        
+        void DeleteNewsItem(int id);
+        void UpdateNewsItem(NewsItemInputModel news, int id);
+        void PartiallyUpdateNewsItem(NewsItemInputModel news, int id);
     }
 }

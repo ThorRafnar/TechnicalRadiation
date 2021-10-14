@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/TechnicalRadiation.Models.csproj": {}
+    "C:\\Users\\thors\\Documents\\compsci\\TechnicalRadiation\\TechnicalRadiation.Models\\TechnicalRadiation.Models.csproj": {}
   },
   "projects": {
-    "/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/TechnicalRadiation.Models.csproj": {
+    "C:\\Users\\thors\\Documents\\compsci\\TechnicalRadiation\\TechnicalRadiation.Models\\TechnicalRadiation.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/TechnicalRadiation.Models.csproj",
+        "projectUniqueName": "C:\\Users\\thors\\Documents\\compsci\\TechnicalRadiation\\TechnicalRadiation.Models\\TechnicalRadiation.Models.csproj",
         "projectName": "TechnicalRadiation.Models",
-        "projectPath": "/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/TechnicalRadiation.Models.csproj",
-        "packagesPath": "/Users/thorrafnar/.nuget/packages/",
-        "outputPath": "/Users/thorrafnar/RiderProjects/TechnicalRadiation/TechnicalRadiation.Models/obj/",
+        "projectPath": "C:\\Users\\thors\\Documents\\compsci\\TechnicalRadiation\\TechnicalRadiation.Models\\TechnicalRadiation.Models.csproj",
+        "packagesPath": "C:\\Users\\thors\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\thors\\Documents\\compsci\\TechnicalRadiation\\TechnicalRadiation.Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/thorrafnar/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\thors\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -62,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.400/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

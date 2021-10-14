@@ -12,6 +12,10 @@ namespace TechnicalRadiation.Repositories.Interfaces
         NewsItemDetailDto GetNewsItemById(int id);
 
         NewsItemDetailDto CreateNewsItem(NewsItemInputModel newsItem);
-        int DeleteNewsItem(int id);
+        void DeleteNewsItem(int id);
+        void UpdateNewsItem(NewsItemInputModel news, int id);
+        void PartiallyUpdateNewsItem(NewsItemInputModel news, int id);
+        bool DoesExist(int id);
+        void AddLinks(NewsItemDto news);
     }
 }

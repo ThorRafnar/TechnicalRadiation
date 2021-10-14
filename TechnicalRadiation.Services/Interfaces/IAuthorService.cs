@@ -13,6 +13,10 @@ namespace TechnicalRadiation.Services.Interfaces
 
         AuthorDetailDto CreateAuthor(AuthorInputModel authorIM);
 
-        NewsItemDetailDto ConnectAuthorAndNewsItem(int authId, int newsId);
+        void ConnectAuthorAndNewsItem(int authId, int newsId);
+        
+        void DeleteAuthor(int id);
+        void UpdateAuthor(AuthorInputModel author, int id);
+        void PartiallyUpdateAuthor(AuthorInputModel author, int id);
     }
 }

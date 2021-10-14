@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using TechnicalRadiation.Models.Dtos;
 using TechnicalRadiation.Models.InputModels;
 using TechnicalRadiation.Services.Interfaces;
+using TechnicalRadiation.WebApi.Attributes;
+using TechnicalRadiation.Models.Exceptions;
 
 namespace TechnicalRadiation.WebApi.Controllers
 {
@@ -36,41 +38,51 @@ namespace TechnicalRadiation.WebApi.Controllers
             return Ok(_authorService.GetNewsItemsByAuthorId(authorId));
         }
         
-        //TODO Authorize
+        [MyAuthorize]
         [HttpPost]
         [Route("")]
         public IActionResult CreateAuthor([FromBody] AuthorInputModel authorIM)
         {
-            if (!ModelState.IsValid)
-            {
-                return StatusCode(412, authorIM); 
-            }
+            if (!ModelState.IsValid) { throw new ModelFormatException(); }
             AuthorDetailDto createdAuthor = _authorService.CreateAuthor(authorIM);
             return Created($"api/authors/{createdAuthor.Id}", createdAuthor);
         }
         
+        [MyAuthorize]
         [HttpPost]
         [Route("{authId:int}/newsItems/{newsId:int}")]
         public IActionResult ConntectAuthorAndNewsItem([FromRoute] int authId, [FromRoute] int newsId)
         {
-            NewsItemDetailDto connectedNewsItem = _authorService.ConnectAuthorAndNewsItem(authId, newsId);
-            return Created($"api/{newsId}", connectedNewsItem);
+            _authorService.ConnectAuthorAndNewsItem(authId, newsId);
+            return NoContent();
         }
         
-        //TODO returns 405 method not allowed for some reason
+        [MyAuthorize]
         [HttpDelete]
         [Route("/{id:int}")]
-        public IActionResult DeleteNewsItem([FromRoute] int id)
+        public IActionResult DeleteNewsItem(int id)
         {
-            return Ok();
+            _authorService.DeleteAuthor(id);
+            return NoContent();
         }
         
-        //TODO returns 405 method not allowed for some reason
+        [MyAuthorize]
         [HttpPut]
-        [Route("/{id:int}")]
-        public IActionResult UpdateNewsItem([FromBody] NewsItemInputModel news, int id)
+        [Route("{id:int}")]
+        public IActionResult UpdateAuthor([FromBody] AuthorInputModel author, int id)
         {
-            return Ok();
+			if (!ModelState.IsValid) { throw new ModelFormatException(); }
+			_authorService.UpdateAuthor(author, id);
+            return NoContent();
+        }
+
+		[MyAuthorize]
+        [HttpPatch]
+        [Route("{id:int}")]
+        public IActionResult PartiallyUpdateAuthor([FromBody] AuthorInputModel author, int id)
+        {
+			_authorService.UpdateAuthor(author, id);
+            return NoContent();
         }
     }
 }

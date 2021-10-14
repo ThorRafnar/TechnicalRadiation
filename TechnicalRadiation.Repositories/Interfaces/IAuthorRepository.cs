@@ -6,14 +6,19 @@ namespace TechnicalRadiation.Repositories.Interfaces
 {
     public interface IAuthorRepository
     {
-        public List<AuthorDto> GetAllAuthors();
+        List<AuthorDto> GetAllAuthors();
 
-        public AuthorDetailDto GetAuthorById(int id);
+        AuthorDetailDto GetAuthorById(int id);
 
-        public List<NewsItemDto> GetNewsItemsByAuthorId(int authodId);
+        List<NewsItemDto> GetNewsItemsByAuthorId(int authodId);
 
-        public AuthorDetailDto CreateAuthor(AuthorInputModel authorIM);
+        AuthorDetailDto CreateAuthor(AuthorInputModel authorIM);
         
-        public NewsItemDetailDto ConnectAuthorAndNewsItem(int authId, int newsId);
+        void ConnectAuthorAndNewsItem(int authId, int newsId);
+        
+        void DeleteAuthor(int id);
+        void UpdateAuthor(AuthorInputModel author, int id);
+        void PartiallyUpdateAuthor(AuthorInputModel author, int id);
+        bool DoesExist(int id);
     }
 }
