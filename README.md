@@ -1,4 +1,7 @@
 # TechnicalRadiation
+
+Large Assignment I in T-514-VEFT, Web services. Reykjavik University, fall 2021.
+
 A RESTful web API with information about news articles, containing authors and categories.
 Follows HATEOAS for navigation purposes. Each element contains a _links attribute for easier
 navigation.
