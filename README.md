@@ -8,4 +8,7 @@ navigation.
 Uses an SQLite database to store the data, the db file is in the WebApi root directory.
 The authorized endpoints can be accessed by setting the authorization header to 'secret'.
 A more thorough description is found in 'Large-Assignment-I.pdf'.
+
+To run: cd TechnicalRadiation/TechnicalRadiation.WebApi
+dotnet run
   
